@@ -14,6 +14,8 @@ Treemap 之大小為公司市值，顏色為漲幅(%)。
 
 Treemap 為 Google Chart 所提供，說明[在此](https://developers.google.com/chart/interactive/docs/gallery/treemap)
 
+![structure](https://github.com/qaws5503/TW_stock_treemap/blob/main/tw_stock.png)
+
 ### 操作
 
 先執行 Market_price.py -> 產生stock_data.csv -> 再執行stock.py -> 自動更改web/templates/index.html -> 執行stock_flask.py即可架設網站
