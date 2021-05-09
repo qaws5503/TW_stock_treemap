@@ -1,11 +1,10 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
+#%%
 import requests
 import bs4
 import pandas as pd
 import random
 import time
+import datetime
 
 # 爬一次網頁
 def web_crawler(rank):
@@ -40,6 +39,7 @@ def web_crawler(rank):
     
     return df
 
+
 def get_all_data():
     for i in range(6):
         df_now = web_crawler(str(i))
@@ -53,8 +53,21 @@ def get_all_data():
         
     return df
 
-df = get_all_data()
-# 取得想觀察的資料
-df_use = df.loc[:,['代號', '名稱','成交', '漲跌  價', '漲跌  幅', '市值  (億)', '產業別']]
 
-df_use.to_csv('stock_data.csv', index=False)
+def export_data():
+    df = get_all_data()
+    # 取得想觀察的資料
+    df_use = df.loc[:,['代號', '名稱','成交', '漲跌  價', '漲跌  幅', '市值  (億)', '產業別', "股價  日期"]]
+    df_use = df_use.rename(columns={
+                            '代號':'symbol',
+                            '名稱':'name',
+                            '成交':'price',
+                            '漲跌  價':'change',
+                            '漲跌  幅':'change_percentage',
+                            '市值  (億)':'market_value(100M)',
+                            '產業別':'industry',
+                            '股價  日期':'date'})
+    df_use['date'] = str(datetime.datetime.now().year)+'/'+df_use['date']
+    df_use.to_csv('stock_data.csv', index=False)
+
+# %%

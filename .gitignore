@@ -12,3 +12,5 @@
 
 # MacOS setting files
 .DS_Store
+
+__pycache__/*

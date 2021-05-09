@@ -18,6 +18,15 @@ Treemap 為 Google Chart 所提供，說明[在此](https://developers.google.co
 
 ![structure](https://github.com/qaws5503/TW_stock_treemap/blob/main/tw_stock.png)
 
-### 操作
+## 操作
 
-先執行 Market_price.py -> 產生stock_data.csv -> 再執行stock.py -> 自動更改web/templates/index.html -> 執行stock_flask.py即可架設網站
+### Normal using
+
+`python3 main.py`
+
+
+### For Flask
+
+`python3 main.py -m 1`
+
+再到`/web`內執行stock_flask.py即可架設網站
