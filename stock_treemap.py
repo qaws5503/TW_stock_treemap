@@ -38,7 +38,8 @@ def run(save):
     fig.data[0].customdata = np.where((fig.data[0].customdata=='(?)'), 'None', fig.data[0].customdata)
     # Custom hover text
     fig.data[0].hovertemplate = '<b>%{customdata[2]} %{label}</b><br><br>收盤價=%{customdata[0]}<br>市值=%{value}億<br>產業=%{customdata[3]}<br>漲跌幅=%{color:.2f}%<br>漲跌額=%{customdata[1]}<extra></extra>'
-    fig.update_layout(title=stock_data.loc[0,'date']+' 台股板塊漲幅',)
+    fig.update_layout(title=stock_data.loc[0,'date']+' 台股板塊漲幅',
+                        uniformtext=dict(minsize=12, mode='hide'))
     if save == True:
         fig.write_html("stock.html")
     fig.show()
