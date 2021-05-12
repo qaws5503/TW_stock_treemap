@@ -7,12 +7,20 @@ import plotly.express as px
 import web_crawler
 from pandas.tseries.offsets import BDay
 import datetime
+from pathlib import Path
+
 
 def read_data():
     # check is holiday or not
     date = datetime.datetime.today()
     if date.weekday()>=5:
         date = date - BDay(1)
+    # check csv file exsits
+    my_file = Path("/path/to/file")
+    if not my_file.exists():
+        file = open("stock_data.csv", "w")
+        file.close() 
+
     # check if the data is the most newest
     if pd.read_csv("stock_data.csv",nrows=1).loc[0,'date']!=date.strftime("%Y/%m/%d"):
         web_crawler.export_data()
@@ -42,6 +50,7 @@ def run(save):
                         uniformtext=dict(minsize=12, mode='hide'))
     if save == True:
         fig.write_html("stock.html")
-    fig.show()
+    else:
+        fig.show()
 
 # %%
