@@ -17,12 +17,13 @@ def read_data():
         date = date - BDay(1)
     # check csv file exsits
     my_file = Path("/path/to/file")
-    if not my_file.exists():
+    if my_file.exists():
         file = open("stock_data.csv", "w")
-        file.close() 
-
-    # check if the data is the most newest
-    if pd.read_csv("stock_data.csv",nrows=1).loc[0,'date']!=date.strftime("%Y/%m/%d"):
+        file.close()
+        # check if the data is the most newest
+        if pd.read_csv("stock_data.csv",nrows=1).loc[0,'date']!=date.strftime("%Y/%m/%d"):
+            web_crawler.export_data()
+    else:
         web_crawler.export_data()
     stock_data = pd.read_csv("stock_data.csv")
     stock_data = stock_data.dropna(axis = 0)
